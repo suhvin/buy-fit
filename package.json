@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "push:origin": "git push origin $(git symbolic-ref --short HEAD)"
   },
   "dependencies": {
     "react": "^18",
