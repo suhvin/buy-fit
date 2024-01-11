@@ -1,3 +1,10 @@
+import Example from "@/src/driver/ui/example";
+
 export default function Home() {
-  return <main>hello world</main>;
+  return (
+    <main>
+      hello world
+      <Example />
+    </main>
+  );
 }

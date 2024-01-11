@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from "react";
 import { NonEmptyArray, RouteFunnelProps, StepProps } from "./funnel.type";
 import { Funnel, Step } from "./funnel";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export const useFunnel = <Steps extends NonEmptyArray<string>>(
   array: Steps,
@@ -15,30 +15,14 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
   const [currentStep, setCurrentStep] = React.useState<Steps[number]>(array[0]);
   const router = useRouter();
   const pathName = usePathname();
-  const search = useSearchParams();
 
   const nextStep = (nextQuery: Steps[number]) => {
-    return () => {
-      const nextPath = `${pathName}?step=${nextQuery}`;
-      setCurrentStep(() => {
-        router.push(nextPath);
-        return nextQuery;
-      });
-    };
+    const nextPath = `${pathName}?step=${nextQuery}`;
+    setCurrentStep(() => {
+      router.push(nextPath);
+      return nextQuery;
+    });
   };
-
-  useEffect(() => {
-    const handlePopstate = () => {
-      const nowStep = search.get("step") ?? "";
-      setCurrentStep(nowStep);
-    };
-
-    window.addEventListener("popstate", handlePopstate);
-
-    return () => {
-      window.removeEventListener("popstate", handlePopstate);
-    };
-  }, [search, setCurrentStep]);
 
   useEffect(() => {
     if (option?.hasOwnProperty("initialStep")) {
