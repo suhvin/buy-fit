@@ -29,6 +29,43 @@ const colors = {
   white: "#FFFFFF",
   black: "hsla(0, 0%, 0%, 1)",
 };
+
+const spacing = {
+  homeIndicator: "32px",
+  gutter: "16px",
+  sideMargin: "24px",
+  tabBarSpacing: "38px",
+  "1": "4px",
+  "2": "8px",
+  "3": "12px",
+  "4": "16px",
+  "5": "20px",
+  "6": "24px",
+  "7": "28px",
+  "8": "32px",
+};
+
+const size = {
+  ctaHeight: "52px",
+  contentWidth: "312px",
+  deviceWidth: "360px",
+  tabBarHeight: "80px",
+  statusBar: "44px",
+  full: "100%",
+  half: "50%",
+};
+
+const fontSize = {
+  xxxl: "30px",
+  xxl: "24px",
+  xl: "20px",
+  l: "18px",
+  m: "16px",
+  s: "14px",
+  xs: "13px",
+  xxs: "12px",
+};
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
