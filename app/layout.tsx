@@ -2,6 +2,7 @@ import { Providers } from "@/src/driver/ui/component/shared/provider";
 import "./globals.css";
 
 import type { Metadata } from "next";
+import { Toaster } from "@/src/driver/ui/component/ui/toaster";
 
 export const metadata: Metadata = {
   title: "quokka plate",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ko">
       <body>
         <Providers>{children}</Providers>
+        <Toaster />
       </body>
     </html>
   );
