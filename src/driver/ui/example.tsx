@@ -8,6 +8,7 @@ interface exampleProps {}
 const Example = ({}: exampleProps) => {
   const [Funnel, setStep] = useFunnel(["hi", "hello"] as const);
   const { toast } = useToast();
+
   return (
     <div>
       <Funnel>

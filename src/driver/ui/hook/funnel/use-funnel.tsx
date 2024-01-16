@@ -8,14 +8,12 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
   array: Steps,
   option?: {
     initialStep: Steps[number];
-    // targetPath: string;
   },
 ) => {
   const [steps, _] = React.useState<Steps>(array);
   const [currentStep, setCurrentStep] = React.useState<Steps[number]>(array[0]);
   const router = useRouter();
   const pathName = usePathname();
-
   const nextStep = (nextQuery: Steps[number]) => {
     const nextPath = `${pathName}?step=${nextQuery}`;
     setCurrentStep(() => {
@@ -23,6 +21,21 @@ export const useFunnel = <Steps extends NonEmptyArray<string>>(
       return nextQuery;
     });
   };
+
+  React.useEffect(() => {
+    const popstate = () => {
+      const url = window.location.href;
+      const params = new URLSearchParams(new URL(url).search);
+      const current = params.get("step");
+      if (current !== null && array.includes(current)) {
+        console.log("이건 실행?");
+        setCurrentStep(current);
+      }
+    };
+    window.addEventListener("popstate", popstate);
+    return () => window.removeEventListener("popstate", popstate);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (option?.hasOwnProperty("initialStep")) {
