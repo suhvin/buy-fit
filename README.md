@@ -10,6 +10,13 @@ npx degit quokka-crew/quokka-plate
 
 두 명령어만 입력하면 끝입니다.
 
+# lib
+
+https://ui.shadcn.com/docs
+
+api 사용법은 위 docs에서 확인 가능합니다.
+
+
 # 프로젝트 환경
 
 ## stack
