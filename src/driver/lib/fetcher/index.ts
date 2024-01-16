@@ -23,20 +23,35 @@ export class Fetcher implements IFetch {
     private baseOption?: RequestInit,
   ) {}
   async get(url: string, option?: RequestInit) {
-    return fetch(this.createUrl(url), this.getOption("GET", option));
+    const response = await fetch(this.createUrl(url), this.getOption("GET", option));
+    this.responseOk(response);
+    const data = await this.parseResponse(response);
+    return data;
   }
 
   async post(url: string, option?: RequestInit) {
-    return fetch(this.createUrl(url), this.getOption("POST", option));
+    const response = await fetch(this.createUrl(url), this.getOption("POST", option));
+    this.responseOk(response);
+    const data = await this.parseResponse(response);
+    return data;
   }
   async put(url: string, option?: RequestInit) {
-    return fetch(this.createUrl(url), this.getOption("PUT", option));
+    const response = await fetch(this.createUrl(url), this.getOption("PUT", option));
+    this.responseOk(response);
+    const data = await this.parseResponse(response);
+    return data;
   }
   async delete(url: string, option?: RequestInit) {
-    return fetch(this.createUrl(url), this.getOption("DELETE", option));
+    const response = await fetch(this.createUrl(url), this.getOption("DELETE", option));
+    this.responseOk(response);
+    const data = await this.parseResponse(response);
+    return data;
   }
   async patch(url: string, option?: RequestInit) {
-    return fetch(this.createUrl(url), this.getOption("PATCH", option));
+    const response = await fetch(this.createUrl(url), this.getOption("PATCH", option));
+    this.responseOk(response);
+    const data = await this.parseResponse(response);
+    return data;
   }
 
   responseOk(response: Response, message?: string) {
@@ -48,7 +63,7 @@ export class Fetcher implements IFetch {
   }
 
   setAccessToken(token: unknown) {
-    const headers = { authorization: token };
+    const headers = typeof token === "string" ? { authorization: token } : { authorization: "" };
     return headers;
   }
 
@@ -63,6 +78,14 @@ export class Fetcher implements IFetch {
       method: method,
     };
     return customOption;
+  }
+
+  async parseResponse(response: Response) {
+    try {
+      return await response.json();
+    } catch (e) {
+      return await response.text();
+    }
   }
 }
 
