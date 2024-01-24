@@ -1,4 +1,8 @@
 import type { Config } from "tailwindcss";
+
+const px0_200 = { ...Array.from(Array(201)).map((_, i) => `${i}px`) };
+const text0_30 = Object.fromEntries(Array.from(Array(31)).map((_, i) => [`${i}`, `${i}px`]));
+
 const colors = {
   neutral100: "#2C2932",
   neutral80: "hsla(257, 4%, 34%, 1)",
@@ -42,8 +46,9 @@ const config = {
       },
     },
     extend: {
+      fontSize: text0_30,
       colors: {
-        colors,
+        ...colors,
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
