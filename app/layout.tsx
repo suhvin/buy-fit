@@ -1,8 +1,8 @@
-import { Providers } from "@/src/driver/ui/component/shared/provider";
+import { Providers } from "@/src/@infrastructure/ui/component/shared/provider";
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Toaster } from "@/src/driver/ui/component/ui/toaster";
+import { Toaster } from "@/src/@infrastructure/ui/component/ui/toaster";
 
 export const metadata: Metadata = {
   title: "quokka plate",
