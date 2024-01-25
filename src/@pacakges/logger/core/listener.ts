@@ -1,4 +1,4 @@
-import { PubSubManager } from '../../pub-sub/core/core';
+import { PubSubManager } from '../../pub-sub/core';
 import { LogEventDefault } from '../@types/default/default-type';
 
 export class LoggerPubSubManager<

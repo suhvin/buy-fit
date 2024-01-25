@@ -1,10 +1,7 @@
-import { DeviceHelper } from '../../device-helper/device-helper';
-import { LogEventCreator } from '../@types/creator/log-event-creator';
-import {
-  LogAtomDefault,
-  LogEventDetailDefault,
-} from '../@types/default/default-type';
-import { LogNamePathCreator } from '../@types/creator/log-name-path-creator';
+import { LogEventCreator } from "../@types/creator/log-event-creator";
+import { LogAtomDefault, LogEventDetailDefault } from "../@types/default/default-type";
+import { LogNamePathCreator } from "../@types/creator/log-name-path-creator";
+import { DeviceHelper } from "../../device-helper/core";
 /**
  *
  *
@@ -23,7 +20,7 @@ import { LogNamePathCreator } from '../@types/creator/log-name-path-creator';
 export class LoggerService<
   EventDetail extends LogEventDetailDefault,
   LogAtom extends LogAtomDefault,
-  Glue extends string = '_',
+  Glue extends string = "_",
 > {
   private glue: Glue;
   constructor(config?: {
@@ -31,43 +28,25 @@ export class LoggerService<
       glue?: Glue;
     };
   }) {
-    this.glue = config?.defaultOptions?.glue ?? ('_' as Glue);
+    this.glue = config?.defaultOptions?.glue ?? ("_" as Glue);
   }
 
-  nameTupleToString(
-    tuple: LogNamePathCreator<LogAtom, Glue>['eventNameTuple'],
-  ) {
-    return tuple.join(this.glue) as LogNamePathCreator<
-      LogAtom,
-      Glue
-    >['eventName'];
+  nameTupleToString(tuple: LogNamePathCreator<LogAtom, Glue>["eventNameTuple"]) {
+    return tuple.join(this.glue) as LogNamePathCreator<LogAtom, Glue>["eventName"];
   }
 
-  pathTupleToString(
-    tuple: LogNamePathCreator<LogAtom, Glue>['eventPathTuple'],
-  ) {
-    return tuple.join(this.glue) as LogNamePathCreator<
-      LogAtom,
-      Glue
-    >['eventPath'];
+  pathTupleToString(tuple: LogNamePathCreator<LogAtom, Glue>["eventPathTuple"]) {
+    return tuple.join(this.glue) as LogNamePathCreator<LogAtom, Glue>["eventPath"];
   }
 
-  nameStringToTuple(eventName: LogNamePathCreator<LogAtom, Glue>['eventName']) {
-    return eventName.split(this.glue) as unknown as LogNamePathCreator<
-      LogAtom,
-      Glue
-    >['eventNameTuple'];
+  nameStringToTuple(eventName: LogNamePathCreator<LogAtom, Glue>["eventName"]) {
+    return eventName.split(this.glue) as unknown as LogNamePathCreator<LogAtom, Glue>["eventNameTuple"];
   }
 
-  pathStringToTuple(eventPath: LogNamePathCreator<LogAtom, Glue>['eventPath']) {
-    return eventPath.split(this.glue) as unknown as LogNamePathCreator<
-      LogAtom,
-      Glue
-    >['eventPathTuple'];
+  pathStringToTuple(eventPath: LogNamePathCreator<LogAtom, Glue>["eventPath"]) {
+    return eventPath.split(this.glue) as unknown as LogNamePathCreator<LogAtom, Glue>["eventPathTuple"];
   }
-  protected createLogEnvironment(
-    envObj?: Omit<EventDetail['eventEnvironment'], 'device' | 'environment'>,
-  ) {
+  protected createLogEnvironment(envObj?: Omit<EventDetail["eventEnvironment"], "device" | "environment">) {
     const deviceHelper = new DeviceHelper();
     const device = deviceHelper.getDevice();
     const environment = process.env.NODE_ENV;
@@ -81,12 +60,12 @@ export class LoggerService<
     };
   }
   createLogEvent(event: {
-    type: EventDetail['type'];
-    eventProperty?: EventDetail['eventProperty'];
-    eventName: LogNamePathCreator<LogAtom, Glue>['eventNameTuple'];
-    eventPath: LogNamePathCreator<LogAtom, Glue>['eventPathTuple'];
-    eventUser: EventDetail['eventUser'];
-    eventEnvironment?: EventDetail['eventEnvironment'];
+    type: EventDetail["type"];
+    eventProperty?: EventDetail["eventProperty"];
+    eventName: LogNamePathCreator<LogAtom, Glue>["eventNameTuple"];
+    eventPath: LogNamePathCreator<LogAtom, Glue>["eventPathTuple"];
+    eventUser: EventDetail["eventUser"];
+    eventEnvironment?: EventDetail["eventEnvironment"];
   }): LogEventCreator<EventDetail, LogAtom> {
     const eventEnvironment = this.createLogEnvironment(event.eventEnvironment);
     const eventProperty = event.eventProperty ?? {};
