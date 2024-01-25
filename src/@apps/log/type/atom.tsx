@@ -23,6 +23,8 @@ const kiseockService = new LoggerService<KiseockUser, KiseockAtom, GLUE>();
 const kiseockPubSub = new LoggerPubSubManager<KiseockLogEvent>();
 
 type KiseockLogParam = LogParamCreator<typeof kiseockService>;
+
+// 로거 프로바이더는 전역에 감싸줍니다.
 const LoggerProvider = ({ children }: { children?: React.ReactNode }) => {
   React.useEffect(() => {
     kiseockPubSub.initiate({
@@ -38,11 +40,13 @@ const LoggerProvider = ({ children }: { children?: React.ReactNode }) => {
   return children;
 };
 
+// 이벤트 발행을 도와주는 유틸함수입니다.
 const kiseockPublish = (logBody: KiseockLogParam) => {
   const logEvent = kiseockService.createLogEvent(logBody);
   kiseockPubSub.publish(logEvent);
 };
 
+// 래퍼컴포넌트는 이런식으로 ㅁ나들 수 있어요
 const ClickLogger = ({
   children,
   eventName,
@@ -55,16 +59,40 @@ const ClickLogger = ({
   eventProperty?: Record<string, any>;
 }) => {
   const child = React.Children.only(children);
-  const [user] = React.useState({ 나이: "대충 나이 같은 유저정보들" });
+  const { track } = useLogger();
   return React.cloneElement(child, {
     onClick: (event: Event) => {
-      kiseockPublish({
-        type: "LOG_EVENT",
-        eventName,
-        eventPath,
-        eventProperty,
-        eventUser: user,
-      });
+      track(eventName, eventPath, eventProperty);
     },
   });
+};
+
+export type UserTracker = {
+  track(
+    eventName: KiseockLogNamePath["eventNameTuple"],
+    eventPath: KiseockLogNamePath["eventPathTuple"],
+    eventProperty?: Record<string, any>,
+  ): void;
+};
+
+const useLogger = (): UserTracker => {
+  const user = {
+    age: "2041421살",
+  };
+  const track = (
+    eventName: KiseockLogNamePath["eventNameTuple"],
+    eventPath: KiseockLogNamePath["eventPathTuple"],
+    eventProperty?: Record<string, any>,
+  ) => {
+    kiseockPublish({
+      type: "LOG_EVENT",
+      eventName,
+      eventPath,
+      eventProperty,
+      eventUser: user,
+    });
+  };
+  return {
+    track,
+  };
 };
