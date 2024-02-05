@@ -10,8 +10,7 @@ export const useLogger = (): UserTracker => {
   const track: UserTracker["track"] = (eventNameTuple, eventPathTuple, eventProperty) => {
     const eventName = tupleToString<LogEvent["eventName"]>(eventNameTuple);
     const eventPath = tupleToString<LogEvent["eventPath"]>(eventPathTuple);
-    // if you want to use GA Event
-    // sendGAEvent({ event: "helloworld", value: "hello" });
+
     logger.publish({
       type: "LOG_EVENT",
       eventName,
@@ -23,6 +22,8 @@ export const useLogger = (): UserTracker => {
 
 export const LoggerProvider = () => {
   React.useEffect(() => {
+    // if you want to use GA Event
+    // sendGAEvent({ event: "helloworld", value: "hello" });
     const listener = (event: LogEvent["logEvent"]) => {
       console.group("😉 hello world this is logging");
       console.log("event : ", event);
