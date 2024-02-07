@@ -1,3 +1,4 @@
+"use client";
 import * as ModalPrimitive from "@radix-ui/react-dialog";
 interface labelProps {
   isOpen: boolean;

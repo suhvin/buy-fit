@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 interface labelProps {
@@ -12,7 +13,7 @@ interface labelProps {
   primaryFirst?: boolean;
 }
 
-const HorizontalLabel = ({
+export const DialogHorizontalLabel = ({
   onPrimaryClick,
   onSecondaryClick,
   onOpenChange,
@@ -65,5 +66,3 @@ const HorizontalLabel = ({
     </div>
   ) : null;
 };
-
-export default HorizontalLabel;
