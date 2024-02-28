@@ -108,6 +108,9 @@ const config = {
     },
 
     extend: {
+      screens: {
+        xs: "450px",
+      },
       keyframes: {
         overlayShow: {
           from: { opacity: "0" },
