@@ -3,6 +3,8 @@ import { RootState } from "@/src/shared/store/store";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHelloList, deleteHelloList } from "@/src/shared/store/slice/example-slice";
+// slice에서 export한 함수를 가져와서 사용합니다.
+
 interface pageProps {}
 
 const Page = ({}: pageProps) => {
@@ -18,6 +20,7 @@ const Page = ({}: pageProps) => {
           <button
             onClick={() => {
               dispatch(deleteHelloList(item));
+              //dispatch로 감싸고 보내면 됩니다.
             }}
           >
             헬로 삭제
