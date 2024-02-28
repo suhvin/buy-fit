@@ -1,5 +1,5 @@
 "use client";
-import { RootState } from "@/src/shared/store/store";
+import { AppDispatch, RootState } from "@/src/shared/store/store";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addHelloList, deleteHelloList } from "@/src/shared/store/slice/example-slice";
@@ -9,9 +9,8 @@ interface pageProps {}
 
 const Page = ({}: pageProps) => {
   const hello = useSelector((s: RootState) => s);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch() as AppDispatch;
   console.log(hello.example);
-
   return (
     <div>
       {hello.example.helloList.map((item) => (
