@@ -6,9 +6,15 @@ export class LogCollection {
     try {
       const ref = collection(firestore, "log");
       const addDocument = await addDoc(ref, log);
-      return addDocument.id;
+      return {
+        status: "success",
+        id: addDocument.id,
+      } as const;
     } catch (e) {
       console.error("create log error ");
+      return {
+        status: "error",
+      } as const;
     }
   }
 }
