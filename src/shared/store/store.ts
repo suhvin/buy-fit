@@ -3,6 +3,7 @@ import { exampleSlice } from "./slice/example-slice";
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import { logSlice } from "@/src/entities/log/log.slice";
+import { periodSlice } from "@/src/entities/period/period.slice";
 
 const createNoopStorage = () => {
   return {
@@ -22,7 +23,7 @@ const PERSIST_KEY = "quokka";
 const persistConfig = { key: PERSIST_KEY, storage };
 const persistedReducer = persistReducer(
   persistConfig,
-  combineReducers({ example: exampleSlice.reducer, log: logSlice.reducer }),
+  combineReducers({ example: exampleSlice.reducer, log: logSlice.reducer, period: periodSlice.reducer }),
 );
 
 export const store = configureStore({
