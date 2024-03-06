@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 type HelloType = {
   id: string;
@@ -33,3 +34,14 @@ export const exampleSlice = createSlice({
 
 export const { addHelloList, deleteHelloList } = exampleSlice.actions;
 // 이게 action 함수 역할을 합니다.
+
+export const useHello = () => {
+  const dispatch = useDispatch();
+  const addHello = (action: HelloType) => {
+    dispatch(addHelloList(action));
+  };
+  const deleteHello = (action: HelloType) => {
+    dispatch(deleteHelloList(action));
+  };
+  return { addHello, deleteHello };
+};
