@@ -82,7 +82,7 @@ export const useLog = () => {
       });
     }
   };
-  const track = (nameTuple: EventNameTuple, pathTuple: EventPathTuple, eventProperty: Record<string, any>) => {
+  const track = (nameTuple: EventNameTuple, pathTuple: EventPathTuple, eventProperty?: Record<string, any>) => {
     const eventName = tupleToString<EventName>(nameTuple, GLUE);
     const eventPath = tupleToString<EventPath>(pathTuple, GLUE);
     logger.publish({

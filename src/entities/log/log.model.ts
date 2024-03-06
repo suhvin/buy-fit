@@ -8,7 +8,15 @@ export type FEATURE = "mvp";
 export type PAGE = "/root" | "/landing" | "login";
 export type AT = "toast" | "bottom-sheet" | "dialog" | "banner" | "header" | "footer";
 export type TARGET = "kiseock" | "garam" | "yechan";
-export type ACTION = "click" | "toast-up" | "toast-down" | "dialog-show" | "bottom-sheet-up" | "bottom-sheet-down";
+export type ACTION =
+  | "click"
+  | "page"
+  | "track"
+  | "toast-up"
+  | "toast-down"
+  | "dialog-show"
+  | "bottom-sheet-up"
+  | "bottom-sheet-down";
 export type GLUE = typeof GLUE;
 
 export type LogCampaign = {
