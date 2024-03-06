@@ -34,6 +34,7 @@ export type LogProperty<T extends Record<string, any> = {}> = {
   firstAccessDate: string;
   lastAccessDate: string;
   environment: string;
+  device: string;
 } & T;
 
 export type EventName = `${FEATURE}${GLUE}${TARGET}${GLUE}${ACTION}`;
@@ -45,7 +46,7 @@ export type CustomLogEvent = {
   type: FirebaseLogEvent;
   eventName: EventName;
   eventPath: EventPath;
-  property: LogProperty;
+  eventProperty: LogProperty;
 };
 
 export type LogEvent = PubSubEvent<CustomLogEvent & Record<string, any>>;

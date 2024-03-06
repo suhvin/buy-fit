@@ -1,20 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  CustomLogEvent,
-  EventName,
-  EventNameTuple,
-  EventPath,
-  EventPathTuple,
-  GLUE,
-  LogEvent,
-  logger,
-} from "./log.model";
+import { CustomLogEvent, EventName, EventNameTuple, EventPath, EventPathTuple, GLUE, logger } from "./log.model";
 import { RootState } from "@/src/shared/store/store";
 import { useSearchParams } from "next/navigation";
 import { createCustomId, tupleToString } from "./log.lib";
+import { DeviceHelper } from "@/packages/device-helper/core";
 
-type OmitTypeEvent = Omit<CustomLogEvent, "type">["property"];
+type OmitTypeEvent = Omit<CustomLogEvent, "type">["eventProperty"];
 const initialState: OmitTypeEvent = {
   bootstraped: false,
   randomId: "",
@@ -22,6 +14,7 @@ const initialState: OmitTypeEvent = {
   firstAccessDate: "",
   lastAccessDate: "",
   environment: "",
+  device: "",
   campaign: {
     who: "",
     where: "",
@@ -70,7 +63,7 @@ export const useLog = () => {
     const environment = process.env.NODE_ENV;
     const date = new Date().toISOString();
     if (state.bootstraped) {
-      return propertyUpdater({ lastAccessDate: date, environment: environment });
+      return propertyUpdater({ lastAccessDate: date, environment: environment, device: DeviceHelper.getDevice() });
     } else {
       propertyUpdater({
         lastAccessDate: date,
@@ -79,6 +72,7 @@ export const useLog = () => {
         randomId: createCustomId(),
         referral: document.referrer ?? "direct",
         bootstraped: true,
+        device: DeviceHelper.getDevice(),
       });
     }
   };
@@ -89,7 +83,7 @@ export const useLog = () => {
       type: "FIREBASE_LOG_EVENT",
       eventName,
       eventPath,
-      property: { ...state, ...eventProperty },
+      eventProperty: { ...state, ...eventProperty },
     });
   };
 
