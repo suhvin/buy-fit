@@ -1,15 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PeriodType } from "./period.model";
-import { useDispatch, useSelector } from "react-redux";
+import { MyPeriodType, PeriodCreateType, PeriodKey, PeriodPubsubEvent, PeriodTriggerType } from "./period.model";
+import { useSelector } from "react-redux";
 import { RootState } from "@/src/shared/store/store";
 import { isDifferenceGreaterThanSeconds } from "./period.lib";
 import { PubSubManager } from "@/packages/pub-sub/core";
 
-export type PeriodKey = "smore-promotion" | "hello-promotion";
-
-export type MyPeriodType = PeriodType<PeriodKey>;
-
-export const periodManager = new PubSubManager<{ type: PeriodKey }>();
+export const periodManager = new PubSubManager<PeriodPubsubEvent>();
 
 const initialState: MyPeriodType[] = [];
 
@@ -20,43 +16,41 @@ export const periodSlice = createSlice({
   name: "periodSlice",
   initialState: initialState,
   reducers: {
-    createPeriodEvent: (state, action: PayloadAction<Omit<MyPeriodType, "periodDate" | "eventCount" | "isFirst">>) => {
-      const { type, period, maximumEventCount } = action.payload;
+    createPeriodEvent: (state, action: PayloadAction<PeriodCreateType>) => {
+      const { eventType, period, maximumEventCount } = action.payload;
       const newPeriod: MyPeriodType = {
-        type,
+        eventType,
         eventCount: 0,
         maximumEventCount: maximumEventCount ?? DEFAULT_MAXIMUM_COUNT,
         period: period ?? DEFAULT_PERIOD_SECOND,
         periodDate: new Date().toISOString(),
-        isFirst: true,
       };
-      const isUniqueKey = !state.some((item) => item.type === action.payload.type);
+      const isUniqueKey = !state.some((item) => item.eventType === action.payload.eventType);
       return isUniqueKey ? state.concat(newPeriod) : state;
     },
     updatePeriodEvent: (state, action: PayloadAction<MyPeriodType>) => {
-      const { type, maximumEventCount, period, eventCount } = action.payload;
+      const { eventType, maximumEventCount, period, eventCount } = action.payload;
       const newPeriod: MyPeriodType = {
-        type,
+        eventType,
         period,
         maximumEventCount,
-        isFirst: false,
         eventCount: eventCount + 1,
         periodDate: new Date().toISOString(),
       };
-      return state.map((item) => (item.type === newPeriod.type ? newPeriod : item));
+      return state.map((item) => (item.eventType === newPeriod.eventType ? newPeriod : item));
     },
     removePeriodEvent: (state, action: PayloadAction<PeriodKey[]>) => {
-      return state.filter((item) => !action.payload.includes(item.type));
+      return state.filter((item) => !action.payload.includes(item.eventType));
     },
   },
 });
 
 export const usePeriod = () => {
-  const dispatch = useDispatch();
   const state = useSelector((s: RootState) => s.period);
-  const isPeriodHit = (key: string) => {
-    const periodEvent = state.find((item) => item.type === key);
+  const isPeriodHit = (key: PeriodKey) => {
+    const periodEvent = state.find((item) => item.eventType === key);
     if (!periodEvent) return false;
+    if (periodEvent.eventCount === 0) return true;
     if (periodEvent.eventCount >= (periodEvent.maximumEventCount ?? DEFAULT_MAXIMUM_COUNT)) return false;
     return isDifferenceGreaterThanSeconds(
       periodEvent.periodDate,
@@ -64,19 +58,25 @@ export const usePeriod = () => {
       periodEvent.period ?? DEFAULT_PERIOD_SECOND,
     );
   };
-  const updatePeriodEvent = (action: MyPeriodType) => {
-    dispatch(periodSlice.actions.updatePeriodEvent(action));
+  const findPeriod = (key: PeriodKey) => {
+    return state.find((item) => item.eventType === key);
   };
-  const removePeriodEvent = (action: PeriodKey[]) => {
-    dispatch(periodSlice.actions.removePeriodEvent(action));
+  const triggerPeriod = ({ eventType, resolve, reject }: PeriodTriggerType) => {
+    periodManager.publish({ type: "TRIGGERING_EVENT", eventType, resolve, reject });
   };
-  const createPeriodEvent = (action: Omit<MyPeriodType, "periodDate" | "eventCount" | "isFirst">) => {
-    dispatch(periodSlice.actions.createPeriodEvent(action));
+  const removePeriod = (removeKey: PeriodKey[]) => {
+    periodManager.publish({ type: "REMOVE_EVENT", removeKey });
   };
+  const publishPeriod = (action: Omit<MyPeriodType, "periodDate" | "eventCount" | "isFirst">) => {
+    periodManager.publish({ type: "PUBLISH_EVENT", ...action });
+  };
+
   return {
     isPeriodHit,
-    updatePeriodEvent,
-    removePeriodEvent,
-    createPeriodEvent,
+    findPeriod,
+    state,
+    triggerPeriod,
+    removePeriod,
+    publishPeriod,
   };
 };
