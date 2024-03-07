@@ -1,3 +1,1 @@
-export const ROUTE = {
-  root: "/",
-};
+export const ROUTE_ROOT = "/" as const;
