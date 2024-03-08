@@ -5,9 +5,14 @@ import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { ENV_GOOGLE } from "@/src/shared/constant/env";
 import { Provider } from "@/src/app/initialize/provider";
 import { removeConsoleWhenProduction } from "@/src/shared/util/environment/remove-console";
+
 export const metadata: Metadata = {
-  title: "quokka plate",
-  description: "by quokka crew",
+  title: {
+    default: "quokkaplate",
+    template: "%s - quokkaplate",
+  },
+  description: "quokkaplate",
+  verification: {},
 };
 
 removeConsoleWhenProduction();
