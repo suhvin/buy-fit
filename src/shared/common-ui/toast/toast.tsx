@@ -12,9 +12,9 @@ const ToastViewport = React.forwardRef<
     ref={ref}
     className={`
       fixed z-[100] 
-      md:max-w-[420px] flex max-h-screen gap-y-[16px] w-full flex-col-reverse 
+      md:max-w-[calc(450px-64px)] w-[calc(100%-64px)] flex max-h-screen gap-y-[16px] flex-col-reverse 
      justify-center items-center
-      left-[50%] translate-x-[-50%] bottom-0 pb-[16px]
+      left-[50%] translate-x-[-50%] bottom-[48px] pb-[0px]
       `}
     {...props}
   />
@@ -26,7 +26,7 @@ ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
 
 const toastVariants = cva(
   `group pointer-events-auto relative flex w-full
- justify-center item-center p-16 rounded-sm
+ justify-center item-center py-[12px] rounded-[15px] text-[14px] font-[600]
 
 transition-all data-[swipe=cancel]:translate-x-0 data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)]
 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)]
@@ -38,8 +38,8 @@ data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bott
   {
     variants: {
       variant: {
-        default: " bg-positive-10",
-        warning: "bg-negative-10",
+        default: " bg-positive-10 text-positive-100",
+        warning: "bg-negative-10 text-negative-100",
       },
     },
     defaultVariants: {

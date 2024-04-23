@@ -5,7 +5,7 @@ export type DefaultPubSubEvent = PubSubEvent<{ type: string }>;
 export type PubSubEventHandler<T extends DefaultPubSubEvent> = (event: T) => void;
 
 export type PubSubEventHandlersMaps<Event extends DefaultPubSubEvent> = {
-  [K in Event["type"]]?: Array<PubSubEventHandler<Extract<Event, { type: K }>>>;
+  [K in Event["type"]]?: Array<PubSubEventHandler<Event>>;
 };
 
 export class PubSubManager<Event extends DefaultPubSubEvent> {
@@ -13,14 +13,14 @@ export class PubSubManager<Event extends DefaultPubSubEvent> {
     [eventType in Event["type"]]?: Array<PubSubEventHandler<Event>>;
   } = {};
 
-  subscribe<K extends Event["type"]>(eventType: K, handler: PubSubEventHandler<Extract<Event, { type: K }>>) {
+  subscribe(eventType: Event["type"], handler: PubSubEventHandler<Event>) {
     if (!this.subscribers[eventType]) {
       this.subscribers[eventType] = [];
     }
-    this.subscribers[eventType]?.push(handler as PubSubEventHandler<Event>);
+    this.subscribers[eventType]?.push(handler);
   }
 
-  unsubscribe<K extends Event["type"]>(eventType: K, handler: PubSubEventHandler<Extract<Event, { type: K }>>) {
+  unsubscribe(eventType: Event["type"], handler: PubSubEventHandler<Event>) {
     const handlers = this.subscribers[eventType];
     if (handlers) {
       this.subscribers[eventType] = handlers.filter((h) => h !== handler);
