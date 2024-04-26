@@ -4,7 +4,7 @@ export type LogEventCreator<
   At extends string,
   Target extends string,
   Action extends string,
-  AnotherObj extends Record<string, any> & { type: string },
+  AnotherObj extends Record<string, unknown>,
   Glue extends string = "_",
 > = {
   feature: Feature;
@@ -13,21 +13,22 @@ export type LogEventCreator<
   target: Target;
   action: Action;
   glue: Glue;
+  eventTuple: [Feature, Page, At, Target, Action];
   eventName: `${Feature}${Glue}${Target}${Glue}${Action}`;
   eventNameTuple: readonly [Feature, Target, Action];
   eventPath: `${Feature}${Glue}${Page}${Glue}${At}${Glue}${Target}`;
   eventPathTuple: readonly [Feature, Page, At, Target];
-  props: {
-    eventName: readonly [Feature, Target, Action];
-    eventPath: readonly [Feature, Page, At, Target];
-  };
-  logEvent: {
-    eventName: `${Feature}${Glue}${Target}${Glue}${Action}`;
+  eventProperty: {
     eventPath: `${Feature}${Glue}${Page}${Glue}${At}${Glue}${Target}`;
   } & AnotherObj;
-  logEventParam: {
-    eventName: readonly [Feature, Target, Action];
-    eventPath: readonly [Feature, Page, At, Target];
-  } & AnotherObj;
+  props: { eventTuple: [Feature, Page, At, Target, Action]; eventProperty: AnotherObj };
+  logEvent: {
+    eventName: `${Feature}${Glue}${Target}${Glue}${Action}`;
+  } & {
+    eventProperty: {
+      eventPath: `${Feature}${Glue}${Page}${Glue}${At}${Glue}${Target}`;
+    } & AnotherObj;
+  };
+  logEventParam: [[Feature, Page, At, Target, Action], AnotherObj | undefined];
 };
-export type DefaultLogEventType = LogEventCreator<string, string, string, string, string, { type: string }, "_">;
+export type DefaultLogEventType = LogEventCreator<string, string, string, string, string, Record<string, unknown>, "_">;

@@ -1,18 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
-import { exampleSlice } from "./slice/example-slice";
 import { tagSlice } from "./slice/tag-slice";
 
 const createNoopStorage = () => {
   return {
-    getItem(_key: any) {
+    getItem(_key: unknown) {
       return Promise.resolve(null);
     },
-    setItem(_key: any, value: any) {
+    setItem(_key: unknown, value: unknown) {
       return Promise.resolve(value);
     },
-    removeItem(_key: any) {
+    removeItem(_key: unknown) {
       return Promise.resolve();
     },
   };
@@ -20,10 +19,7 @@ const createNoopStorage = () => {
 const storage = typeof window === "undefined" ? createNoopStorage() : createWebStorage("local");
 const PERSIST_KEY = "quokka";
 const persistConfig = { key: PERSIST_KEY, storage };
-const persistedReducer = persistReducer(
-  persistConfig,
-  combineReducers({ tag: tagSlice.reducer, example: exampleSlice.reducer }),
-);
+const persistedReducer = persistReducer(persistConfig, combineReducers({ tag: tagSlice.reducer }));
 
 export const store = configureStore({
   reducer: persistedReducer,

@@ -1,11 +1,9 @@
 export class DeviceHelper {
   static isClient(): boolean {
-    const w = window;
-    return typeof w !== "undefined";
+    return typeof window !== "undefined";
   }
   static isServer(): boolean {
-    const w = window;
-    return typeof w === "undefined";
+    return typeof window === "undefined";
   }
   static isIos(): boolean {
     const ios = /iPhone|IPad|IPod/i;
@@ -18,8 +16,7 @@ export class DeviceHelper {
     return android.test(nav?.userAgent);
   }
   static isWeb(): boolean {
-    const w = window;
-    if (typeof w === "undefined") {
+    if (typeof window === "undefined") {
       return false;
     }
     const android = /Android/i;
