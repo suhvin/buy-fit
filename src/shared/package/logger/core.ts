@@ -32,10 +32,3 @@ export type LogEventCreator<
   logEventParam: [[Feature, Page, At, Target, Action], AnotherObj | undefined];
 };
 export type DefaultLogEventType = LogEventCreator<string, string, string, string, string, Record<string, unknown>, "_">;
-
-class Logger<T extends DefaultLogEventType = DefaultLogEventType> {
-  constructor(private repository: { create: (...arg: unknown[]) => void }) {}
-  async log(name: T["logEventParam"][0], prop: T["logEventParam"][1]) {
-    this.repository.create()
-  }
-}
