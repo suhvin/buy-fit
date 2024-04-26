@@ -13,6 +13,7 @@ export type LogEventCreator<
   target: Target;
   action: Action;
   glue: Glue;
+  eventTuple: [Feature, Page, At, Target, Action];
   eventName: `${Feature}${Glue}${Target}${Glue}${Action}`;
   eventNameTuple: readonly [Feature, Target, Action];
   eventPath: `${Feature}${Glue}${Page}${Glue}${At}${Glue}${Target}`;

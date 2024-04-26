@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
 import { ENV_GOOGLE } from "@/src/shared/constant/env";
 import { Provider } from "@/src/app/initialize/provider";
-import { removeConsoleWhenProduction } from "@/src/shared/util/environment/remove-console";
 
 export const metadata: Metadata = {
   title: {
@@ -14,8 +13,6 @@ export const metadata: Metadata = {
   description: "quokkaplate",
   verification: {},
 };
-
-removeConsoleWhenProduction();
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
