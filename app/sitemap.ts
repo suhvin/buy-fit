@@ -1,11 +1,10 @@
-import { MetadataRoute } from "next";
+import { SITE_DOMAIN } from '@/src/shared/configs/site-domain';
+import type { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://MY_URL.vercel.app";
-
   return [
     {
-      url: baseUrl,
+      url: SITE_DOMAIN,
       lastModified: new Date(),
     },
   ];

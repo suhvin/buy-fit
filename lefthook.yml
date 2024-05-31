@@ -1,0 +1,17 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      run: yarn format
+      stage_fixed: true
+    lint-next:
+      run: yarn lint:next
+      stage_fixed: true
+    lint:
+      run: yarn lint
+      stage_fixed: true
+pre-push:
+  parallel: true
+  commands:
+    test:
+      run: yarn test:ci
