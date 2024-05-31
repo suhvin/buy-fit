@@ -2,9 +2,9 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
-import { ENV_GOOGLE } from "@/src/shared/constant/env";
+import { ENV_GOOGLE } from "@/src/shared/configs/env";
 import { Provider } from "@/src/app/initialize/provider";
-import { LoggerProvider } from "@/src/shared/package/logger/use-logger";
+import { LoggerProvider } from "@/src/shared/modules/logger/use-logger";
 
 export const metadata: Metadata = {
   title: {

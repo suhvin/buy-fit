@@ -1,6 +1,6 @@
 "use client";
 
-import { useLogger } from "@/src/shared/package/logger/use-logger";
+import { useLogger } from "@/src/shared/modules/logger/use-logger";
 import React from "react";
 
 interface pageProps {}
