@@ -10,9 +10,9 @@
     "push:origin": "git push origin $(git symbolic-ref --short HEAD)",
     "prepare": "husky install",
     "test": "vitest",
-    "test:bot": "vitest run --silent --reporter=json --outputFile=./test-result.json",
+    "test:ci": "vitest run",
+    "test:snapshot": "vitest run -u",
     "test:coverage": "vitest run --coverage.all",
-    "test:all": "vitest run",
     "format": "npx @biomejs/biome format --write ./app ./src",
     "lint": "npx @biomejs/biome lint --apply ./app ./src",
     "check": "npx @biomejs/biome check --apply ./app ./src"
