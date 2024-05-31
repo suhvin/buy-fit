@@ -13,10 +13,10 @@ class HttpClient {
   private baseURL: string;
   private headers: Record<string, string>;
 
-  constructor(baseUrl = "") {
+  constructor(baseUrl = '') {
     this.baseURL = `${baseUrl}`;
     this.headers = {
-      csrf: "token",
+      csrf: 'token',
       Referer: this.baseURL,
     };
 
@@ -37,52 +37,52 @@ class HttpClient {
         method,
         headers: {
           ...this.headers,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           ...config?.headers,
         },
-        credentials: "include",
+        credentials: 'include',
         body: data ? JSON.stringify(data) : undefined,
         ...config,
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
 
       const responseData: T = await response.json();
       return responseData;
     } catch (error) {
-      console.error("Error:", error);
+      console.error('Error:', error);
       throw error;
     }
   }
 
   private get<T>(url: string, config?: RequestInit): Promise<T> {
-    return this.request<T>("GET", url, undefined, config);
+    return this.request<T>('GET', url, undefined, config);
   }
 
   private delete<T>(url: string, config?: RequestInit): Promise<T> {
-    return this.request<T>("DELETE", url, undefined, config);
+    return this.request<T>('DELETE', url, undefined, config);
   }
 
   private head<T>(url: string, config?: RequestInit): Promise<T> {
-    return this.request<T>("HEAD", url, undefined, config);
+    return this.request<T>('HEAD', url, undefined, config);
   }
 
   private options<T>(url: string, config?: RequestInit): Promise<T> {
-    return this.request<T>("OPTIONS", url, undefined, config);
+    return this.request<T>('OPTIONS', url, undefined, config);
   }
 
   private post<T>(url: string, data?: unknown, config?: RequestInit): Promise<T> {
-    return this.request<T>("POST", url, data, config);
+    return this.request<T>('POST', url, data, config);
   }
 
   private put<T>(url: string, data?: unknown, config?: RequestInit): Promise<T> {
-    return this.request<T>("PUT", url, data, config);
+    return this.request<T>('PUT', url, data, config);
   }
 
   private patch<T>(url: string, data?: unknown, config?: RequestInit): Promise<T> {
-    return this.request<T>("PATCH", url, data, config);
+    return this.request<T>('PATCH', url, data, config);
   }
 }
 

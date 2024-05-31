@@ -1,5 +1,5 @@
-import NextLink from "next/link";
-import { type ComponentPropsWithoutRef, type ComponentType, type ReactNode, type Ref, forwardRef } from "react";
+import NextLink from 'next/link';
+import { type ComponentPropsWithoutRef, type ComponentType, type ReactNode, type Ref, forwardRef } from 'react';
 
 type LinkProps = {
   href: string;
@@ -7,7 +7,7 @@ type LinkProps = {
   scroll?: boolean;
   prefetch?: boolean;
   children?: ReactNode;
-} & ComponentPropsWithoutRef<"a">;
+} & ComponentPropsWithoutRef<'a'>;
 
 export type LinkType = ComponentType<LinkProps>;
 

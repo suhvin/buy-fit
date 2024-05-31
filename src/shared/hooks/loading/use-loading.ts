@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from 'react';
 
 export function useLoading(): [boolean, <T>(promise: Promise<T>) => Promise<T>] {
   const [loading, setLoading] = useState(false);

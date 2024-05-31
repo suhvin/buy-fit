@@ -5,7 +5,7 @@ export type LogEventCreator<
   Target extends string,
   Action extends string,
   AnotherObj extends Record<string, unknown>,
-  Glue extends string = "_",
+  Glue extends string = '_',
 > = {
   feature: Feature;
   page: Page;
@@ -31,4 +31,4 @@ export type LogEventCreator<
   };
   logEventParam: [[Feature, Page, At, Target, Action], AnotherObj | undefined];
 };
-export type DefaultLogEventType = LogEventCreator<string, string, string, string, string, Record<string, unknown>, "_">;
+export type DefaultLogEventType = LogEventCreator<string, string, string, string, string, Record<string, unknown>, '_'>;

@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { PropsWithChildren, useEffect } from "react";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { type PropsWithChildren, useEffect } from 'react';
 
 export const TagProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
 
   const searchParams = useSearchParams();
 
-  const utm_source = searchParams.get("utm_source");
-  const utm_medium = searchParams.get("utm_medium");
-  const utm_campaign = searchParams.get("utm_campaign");
-  const utm_content = searchParams.get("utm_content");
-  const utm_term = searchParams.get("utm_term");
+  const utm_source = searchParams.get('utm_source');
+  const utm_medium = searchParams.get('utm_medium');
+  const utm_campaign = searchParams.get('utm_campaign');
+  const utm_content = searchParams.get('utm_content');
+  const utm_term = searchParams.get('utm_term');
 
   const isCampaign = utm_source || utm_medium || utm_campaign || utm_content || utm_term;
 
@@ -20,11 +20,11 @@ export const TagProvider = ({ children }: PropsWithChildren) => {
     if (isCampaign) {
       (async () => {
         return {
-          utm_source: utm_source ?? "",
-          utm_medium: utm_medium ?? "",
-          utm_campaign: utm_campaign ?? "",
-          utm_content: utm_content ?? "",
-          utm_term: utm_term ?? "",
+          utm_source: utm_source ?? '',
+          utm_medium: utm_medium ?? '',
+          utm_campaign: utm_campaign ?? '',
+          utm_content: utm_content ?? '',
+          utm_term: utm_term ?? '',
         };
       })();
     }
@@ -73,7 +73,7 @@ export function makeRandomId() {
 function addZero(num: number) {
   let numZero = String(num);
   if (Number(numZero) < 10) {
-    numZero = "0" + numZero;
+    numZero = '0' + numZero;
   }
   return numZero;
 }

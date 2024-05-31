@@ -1,5 +1,5 @@
-"use client";
-import { useRef } from "react";
+'use client';
+import { useRef } from 'react';
 
 export const useDebounce = <ParamType extends unknown[]>(callback: (...params: ParamType) => void, time: number) => {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);

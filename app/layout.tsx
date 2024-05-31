@@ -1,16 +1,16 @@
-import "../src/app/style/root.css";
-import type { Metadata } from "next";
-import { GoogleTagManager, GoogleAnalytics } from "@next/third-parties/google";
-import { LoggerProvider } from "@/src/shared/modules/logger/use-logger";
-import { Provider } from "@/src/app/provider/provider";
-import { ENVIRONMENT_GOOGLE } from "@/src/shared/configs/environment";
+import '../src/app/style/root.css';
+import type { Metadata } from 'next';
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
+import { LoggerProvider } from '@/src/shared/modules/logger/use-logger';
+import { Provider } from '@/src/app/provider/provider';
+import { ENVIRONMENT_GOOGLE } from '@/src/shared/configs/environment';
 
 export const metadata: Metadata = {
   title: {
-    default: "quokkaplate",
-    template: "%s - quokkaplate",
+    default: 'quokkaplate',
+    template: '%s - quokkaplate',
   },
-  description: "quokkaplate",
+  description: 'quokkaplate',
   verification: {},
 };
 

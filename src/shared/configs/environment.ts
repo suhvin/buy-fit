@@ -1,7 +1,7 @@
 // env에 형식에 맞는 환경변수 생성
 export const ENVIRONMENT_GOOGLE = {
-  GA_ID: process.env.GA_ID ?? "",
-  GTM_ID: process.env.GTM_ID ?? "",
+  GA_ID: process.env.GA_ID ?? '',
+  GTM_ID: process.env.GTM_ID ?? '',
 } as const;
 
 export const ENVIRONMENT_FIREBASE = {

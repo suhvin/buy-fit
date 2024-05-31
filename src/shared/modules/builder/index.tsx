@@ -5,12 +5,12 @@ import {
   type ReactNode,
   createContext,
   useContext as useReactContext,
-} from "react";
+} from 'react';
 
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export const provider = <T extends ComponentType<any>>(
   Component: T,
-  prop: Omit<ComponentPropsWithoutRef<T>, "children">,
+  prop: Omit<ComponentPropsWithoutRef<T>, 'children'>
 ): [T, ComponentPropsWithoutRef<T>] => [Component, prop as ComponentPropsWithoutRef<T>];
 
 export const tree = <T extends ReturnType<typeof provider>>(providerTree: Array<T>) => {
@@ -26,7 +26,7 @@ export const context = <T extends object>(initialValue: T | null) => {
   const useContext = () => {
     const value = useReactContext(Context);
     if (!value) {
-      throw new Error("should provid context");
+      throw new Error('should provid context');
     }
     return value;
   };

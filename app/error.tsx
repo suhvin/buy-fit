@@ -1,4 +1,4 @@
-"use client";
+'use client';
 const ErrorPage = () => {
   return <div>error</div>;
 };
