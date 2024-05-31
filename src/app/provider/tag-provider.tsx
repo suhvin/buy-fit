@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { type PropsWithChildren, useEffect } from 'react';
 
+// searchparams 쓰는건 프로바이더로 감싸면 안됨
 export const TagProvider = ({ children }: PropsWithChildren) => {
   const router = useRouter();
 
