@@ -8,7 +8,6 @@
     "start": "next start",
     "lint:next": "next lint",
     "push:origin": "git push origin $(git symbolic-ref --short HEAD)",
-    "prepare": "husky install",
     "test": "vitest",
     "test:ci": "vitest run",
     "test:snapshot": "vitest run -u",
@@ -66,6 +65,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.3",
+    "@playwright/test": "^1.44.1",
     "@tanstack/react-query-devtools": "^5.17.9",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^14.3.1",
