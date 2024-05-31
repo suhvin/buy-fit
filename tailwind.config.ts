@@ -103,14 +103,14 @@ const config = {
       full: "999px",
     },
     boxShadow: {
-      default: `1px 1px 10px 1px hsla(264, 95%, 66%, 0.15)`,
-      light: `0px 1px 8px 0px hsla(264, 95%, 66%, 0.25)`,
-      dialog: `0px -8px 16px 0px hsla(0, 0%, 0%, 0.1)`,
-      base: `0px 1px 2px 0px hsla(0, 0%, 0%, 0.06) , 0px 1px 3px 0px hsla(0, 0%, 0%, 0.1)`,
-      card: `0px 4px 6px -2px hsla(0, 0%, 0%, 0.05) , 0px 10px 15px -3px hsla(0, 0%, 0%, 0.1)`,
-      drop: `0px 0px 15px 0px hsla(218, 20%, 34%, 0.3)`,
-      "drop-gray": `0px 0px 15px 0px hsla(218, 20%, 34%, 0.1)`,
-      matching: `0px 0px 15px 0px rgba(69, 82, 104, 0.30)`,
+      default: "1px 1px 10px 1px hsla(264, 95%, 66%, 0.15)",
+      light: "0px 1px 8px 0px hsla(264, 95%, 66%, 0.25)",
+      dialog: "0px -8px 16px 0px hsla(0, 0%, 0%, 0.1)",
+      base: "0px 1px 2px 0px hsla(0, 0%, 0%, 0.06) , 0px 1px 3px 0px hsla(0, 0%, 0%, 0.1)",
+      card: "0px 4px 6px -2px hsla(0, 0%, 0%, 0.05) , 0px 10px 15px -3px hsla(0, 0%, 0%, 0.1)",
+      drop: "0px 0px 15px 0px hsla(218, 20%, 34%, 0.3)",
+      "drop-gray": "0px 0px 15px 0px hsla(218, 20%, 34%, 0.1)",
+      matching: "0px 0px 15px 0px rgba(69, 82, 104, 0.30)",
     },
 
     extend: {

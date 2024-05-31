@@ -1,3 +1,4 @@
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export type PubSubEvent<EventContent extends Record<string, any> & { type: string }> = EventContent;
 
 export type DefaultPubSubEvent = PubSubEvent<{ type: string }>;
@@ -30,12 +31,15 @@ export class PubSubManager<Event extends DefaultPubSubEvent> {
   publish(event: Event) {
     const handlers = this.subscribers?.[event?.type as unknown as Event['type']] || [];
 
+    // biome-ignore lint/complexity/noForEach: <explanation>
     handlers.forEach(handler => handler(event));
   }
 
   initiate(handlerObject: PubSubEventHandlersMaps<Event>) {
     const entries = Object.entries(handlerObject) as [Event['type'], PubSubEventHandlersMaps<Event>[Event['type']]][];
+    // biome-ignore lint/complexity/noForEach: <explanation>
     entries.forEach(([eventType, handlers]) => {
+      // biome-ignore lint/complexity/noForEach: <explanation>
       handlers?.forEach(handler => {
         this.subscribe(eventType, handler);
       });

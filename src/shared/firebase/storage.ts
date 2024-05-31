@@ -1,6 +1,7 @@
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { storage } from './my-base';
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class Storage {
   static readFile(file: File): Promise<ArrayBuffer> {
     return new Promise((resolve, reject) => {

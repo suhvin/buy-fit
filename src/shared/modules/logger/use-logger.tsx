@@ -9,9 +9,9 @@ const LoggerRepository = {
   create: async (event: unknown) => {
     console.group('😍 Quokka Log Event PubSub Start');
     await new Promise(res => setTimeout(res, 10));
-    console.log(`we received event Data :`);
+    console.log('we received event Data :');
     console.dir(event);
-    console.log(`logger is working`);
+    console.log('logger is working');
     console.groupEnd();
   },
 };

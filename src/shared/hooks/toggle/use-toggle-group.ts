@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import { type NonEmptyArray, convertListToObject } from './toggle.util';
 
 export const useToggleGroup = <ToggleKeys extends NonEmptyArray<string>>(keyList: ToggleKeys) => {
   const [toggleGroup, setToggleGroup] = React.useState(() => convertListToObject(keyList, false));
@@ -18,4 +17,19 @@ export const useToggleGroup = <ToggleKeys extends NonEmptyArray<string>>(keyList
     });
   };
   return [toggleGroup, onToggle, setToggleGroup] as const;
+};
+
+type NonEmptyArray<T> = readonly [T, ...T[]];
+
+const convertListToObject = <T extends NonEmptyArray<string>, Value>(
+  list: T,
+  value: Value
+): Record<T[number], Value> => {
+  return list.reduce(
+    (obj, str) => {
+      obj[str as T[number]] = value;
+      return obj;
+    },
+    {} as { [key in T[number]]: Value }
+  );
 };
