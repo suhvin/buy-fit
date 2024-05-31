@@ -10,3 +10,8 @@ pre-commit:
     lint:
       run: yarn lint
       stage_fixed: true
+pre-push:
+  parallel: true
+  commands:
+    test:
+      run: yarn test:ci
