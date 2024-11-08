@@ -12,6 +12,8 @@ export class LogCollection {
    */
 
   static createClickLog = async (data: object) => {
+    console.log('test');
+    console.log('data', data);
     const clickCollectionRef = collection(firestore, 'eventClick');
     const newClickDocRef = await addDoc(clickCollectionRef, {
       ...data,

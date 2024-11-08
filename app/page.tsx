@@ -1,5 +1,7 @@
+import HomePage from './home/page';
+
 const Page = () => {
-  return <div className=" flex flex-col">hello</div>;
+  return <HomePage />;
 };
 
 export default Page;
