@@ -4,6 +4,7 @@ import { LoggerProvider } from '@/src/shared/modules/logger/use-logger';
 import { Provider } from '@/src/app/provider/provider';
 import { ENVIRONMENT_GOOGLE } from '@/src/shared/configs/environment';
 import { fa } from '@/src/app/style/font/fa/fa';
+import '../public/assets/css/main.css';
 
 export const metadata: Metadata = {
   title: {

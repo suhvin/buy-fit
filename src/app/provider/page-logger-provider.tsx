@@ -19,7 +19,7 @@ const PageLoggerProvider = () => {
 
   useEffect(() => {
     LogCollection.createPageLog({ randomId, ...utmGlobalAtom });
-  }, [pathname, randomId, utmGlobalAtom]);
+  }, [randomId, utmGlobalAtom]);
 
   return <></>;
 };
@@ -52,7 +52,7 @@ export function makeRandomId() {
 function addZero(num: number) {
   let numZero = String(num);
   if (Number(numZero) < 10) {
-    numZero = '0' + numZero;
+    numZero = `0${numZero}`;
   }
   return numZero;
 }

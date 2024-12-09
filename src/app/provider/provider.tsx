@@ -1,10 +1,10 @@
-"use client";
-import type React from "react";
-import { TanstackProvider } from "./tanstak-query";
-import { Provider as JotaiProvider } from "jotai";
-import PageLoggerProvider from "./page-logger-provider";
-import { TagProvider } from "./tag-provider";
-import { Suspense } from "react";
+'use client';
+import type React from 'react';
+import { TanstackProvider } from './tanstak-query';
+import { Provider as JotaiProvider } from 'jotai';
+import PageLoggerProvider from './page-logger-provider';
+import { TagProvider } from './tag-provider';
+import { Suspense } from 'react';
 
 export const Provider = ({ children }: React.PropsWithChildren) => {
   return (

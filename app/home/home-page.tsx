@@ -1,13 +1,13 @@
-"use client";
-import React from "react";
-import Script from "next/script";
-import { useEffect, useState } from "react";
-import ContentReturn from "./component/content-return";
-import ContentBuyFit from "./component/content-buy-fit";
-import Footer from "./component/footer";
-import Header from "./component/header";
-import ContentHard from "./component/content-hard";
-import ContentFree from "./component/content-free";
+'use client';
+import React from 'react';
+import Script from 'next/script';
+import { useEffect, useState } from 'react';
+import ContentReturn from './component/content-return';
+import ContentBuyFit from './component/content-buy-fit';
+import Form from './component/form/form';
+import Header from './component/header';
+import ContentHard from './component/content-hard';
+import ContentFree from './component/content-free';
 
 const HomePage = () => {
   const [isClient, setIsClient] = useState(false);
@@ -15,13 +15,13 @@ const HomePage = () => {
   useEffect(() => {
     setIsClient(true);
 
-    if (typeof window !== "undefined") {
-      const $ = require("jquery");
+    if (typeof window !== 'undefined') {
+      const $ = require('jquery');
       window.jQuery = $;
 
       // jQuery 초기화 코드
       $(document).ready(() => {
-        document.body.classList.remove("is-preload");
+        document.body.classList.remove('is-preload');
       });
     }
   }, []);
@@ -37,7 +37,7 @@ const HomePage = () => {
       <ContentHard />
       <ContentBuyFit />
       <ContentFree />
-      <Footer />
+      <Form />
 
       {/* JavaScript 파일 로드 */}
       <Script src="/assets/js/jquery.min.js" strategy="beforeInteractive" />

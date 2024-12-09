@@ -1,7 +1,7 @@
 // app/api/add-to-sheet/route.ts
 import { NextResponse } from 'next/server';
 import { google } from 'googleapis';
-import path from 'path';
+import path from 'node:path';
 
 const SPREADSHEET_ID = '1ObbvT3XLodNwa8DcCLN0EEUy43rxECEKs31CSEUMg48'; // Google Sheets ID
 const SHEET_NAME = '시트1'; // 시트 이름
